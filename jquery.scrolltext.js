@@ -74,7 +74,7 @@
                 scrollPanel.append(newBlock);
                 blockArray.push({block: $(newBlock), id: i});
                 var image = newBlock.find('img');
-                if(image.length != 0) {
+                if(image.length !== 0) {
                     image.load(function() {
                         adjustParameters();
                     });
