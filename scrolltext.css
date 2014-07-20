@@ -1,0 +1,58 @@
+/* -------------------------------------------------------------- 
+  -=SCROLLING TEXT PANEL
+-------------------------------------------------------------- */  
+.scroll_panel, .scroll_panel_up, .scroll_panel_images  {
+    overflow:hidden;
+    position:relative; 
+    width:100%; 
+    max-width:470px;
+    margin: 0;
+}
+
+.scroll_panel i, .scroll_panel_up i {
+    font-family: "FontAwesome";  
+}
+.scroll_down, .scroll_up {
+    position: absolute;
+    right:0;
+    z-index:999;
+    font-size: 16px;
+}
+.scroll_down {
+    top: 45px;
+}
+.scroll_up {
+    top: 0;    
+}
+.scroll_up:hover, .scroll_down:hover {
+    cursor: pointer;
+}
+.text_block {
+    text-align:center; 
+    padding: 0 25px 0 0;
+    position:absolute; 
+    top: 0;
+    left:0; 
+    right:0;
+    margin: auto;
+    display: none;
+    text-align: left;
+  }
+  .text_block p {
+    /*position: absolute;*/
+    width: 100%;
+    text-transform: none;
+    font-size: 14px;
+    /*top: 0;*/
+    /*bottom: 0;*/
+    margin: auto
+  }
+  .text_block a {
+      text-decoration: underline;
+  }
+  
+  
+  @media screen and (max-width: 700px ){
+       .scroll_panel, .scroll_panel_up {margin: 0 auto;}
+  }
+  
