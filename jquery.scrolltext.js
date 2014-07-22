@@ -5,20 +5,33 @@
         var scrollDirection = options.scrollDirection || 'down';
         var scrollMultiplier = scrollDirection === 'down' ? -1 : 1;
         var afterSetupFunction = options.afterSetupCallback || null;   
-        var pauseOnHover = options.pauseOnHover || true;
+        var pauseOnHover = options.pauseOnHover || false;
+        var showButtons = options.showButtons || false;
+        var minBlockHeight = options.minPanelHeight || 40;
         var totalBlocks;
         var currentBlock = {};
         var nextBlock = {};
         var blockArray = [];
         var scrollDistance;
-        var maxBlockHeight = 0;
+        var maxBlockHeight = minBlockHeight;
         var scrollTimer;
         var resizeTimer;
         var scrolling = false;
         var inHover = false;
-        var scrollPanel = $(this);
+        var scrollContainer = $(this);
+        var scrollPanel;
 
-        createBlocks();
+        init();
+        
+        function init(){
+            scrollPanel = $("<div class='scroll_panel'></div>");
+            if(showButtons) {
+                scrollPanel.append("<i class='icon-chevron-up scroll_up'></i><i class='icon-chevron-down scroll_down'></i>");
+            }
+            scrollContainer.append(scrollPanel);
+       
+            createBlocks();            
+        }
 
         $(window).resize(onResize);  
 
@@ -35,6 +48,7 @@
             clearScrollTimer();
         });
 
+        console.log(pauseOnHover);
         if(pauseOnHover) {
            scrollPanel.hover(function(){
                 clearScrollTimer();
@@ -103,7 +117,7 @@
             if(scrolling)
                 onResize();
 
-            maxBlockHeight = 0;
+            maxBlockHeight = minBlockHeight;
             clearScrollTimer();
             for(var i = 0; i < totalBlocks; i++ ){
                 var height = blockArray[i].block.height();

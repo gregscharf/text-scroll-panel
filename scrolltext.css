@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------- 
   -=SCROLLING TEXT PANEL
 -------------------------------------------------------------- */  
-.scroll_panel, .scroll_panel_up, .scroll_panel_images  {
+.scroll_panel  {
     overflow:hidden;
     position:relative; 
     width:100%; 
@@ -9,8 +9,11 @@
     margin: 0;
 }
 
-.scroll_panel i, .scroll_panel_up i {
-    font-family: "FontAwesome";  
+.scroll_panel i {
+    font-family: "FontAwesome"; 
+}
+.scroll_panel img {
+    width: 100%;
 }
 .scroll_down, .scroll_up {
     position: absolute;
@@ -19,7 +22,7 @@
     font-size: 16px;
 }
 .scroll_down {
-    top: 45px;
+    bottom: 0;
 }
 .scroll_up {
     top: 0;    
