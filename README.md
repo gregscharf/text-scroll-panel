@@ -32,9 +32,10 @@ Setup:
     $(document).ready(function(){
         $('#scroll_pane_1').scrolltext({
             textDisplayDuration: 8000,
-            minPanelHeight: 35,
+            minPanelHeight: 35, /*if using the nav buttons it's best to set this 35 pixels high at a minimum*/
             scrollSpeed: 700, 
-            scrollDirection: 'down', 
+            pauseOnHover: true,
+            scrollDirection: 'down', /*options are 'up' and 'down'*/
             showButtons: true,
             htmlBlocks: [
                 "<h2 style='width: 100%; text-align: center;'>This is an Image</h2><img src='../images/logo_2.JPG'>",
