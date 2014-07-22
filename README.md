@@ -1,4 +1,4 @@
-**text-scroll-panel**
+**Text Scroll Panel**
 =================
 Features:
 - Plugin to add blocks of scrolling text, html or images.
@@ -37,7 +37,6 @@ Setup:
                 "<img src='../images/logo_fin.png'>",
                 "Just plain text without html",
                 "<p>This is the third block</p>"
-
             ]
         });
     });
