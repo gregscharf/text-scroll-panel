@@ -12,6 +12,8 @@ Tasks:
 - [ ] Add horizontal scrolling option
 - [ ] User defined buttons
 - [ ] Move setup of html blocks out of plugin setup and into html (?)
+- [ ] Code optimization.
+- [ ] CSS transitions.
 
 Setup:
 ```
