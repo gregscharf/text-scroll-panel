@@ -16,18 +16,23 @@ Tasks:
 - [ ] CSS transitions.
 
 Setup:
-```
 
-<!--In <head> block-->
+**Include in head block**
+```html
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
     <link rel="stylesheet"  href='scrolltext.css' />
+```
 
-
-<!-- Include the panel somewhere within the <body> of your document. -->
+**Include the panel somewhere in the body of your document**
+```html
       <div id='scroll_pane_1'>
       </div>
+```
 
-<!--include script and plugin initialization before end body tag -->
+**include script and plugin initialization before end body tag**
+
+```javascript
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src ='jquery.scrolltext.js'></script>
     <script>
