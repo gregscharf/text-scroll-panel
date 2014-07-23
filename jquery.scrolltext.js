@@ -99,9 +99,7 @@
                     maxBlockHeight = height;
             }
 
-
             var textBlock = scrollPanel.children('.text_block');
-            textBlock.css('top', "10000px");
             textBlock.css('text-align', horizontalAlign);
             switch(verticalAlign) {
                 case "top":

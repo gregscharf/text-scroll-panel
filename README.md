@@ -14,6 +14,7 @@ Tasks:
 - [ ] Move setup of html blocks out of plugin setup and into html (?)
 - [ ] Code optimization.
 - [ ] CSS transitions.
+- [ ] For vertical centering to work all html must be in one containing element. Force this behavior in js to prevent error?
 
 Setup:
 ```
@@ -39,8 +40,10 @@ Setup:
             pauseOnHover: true,
             scrollDirection: 'down', /*options are 'up' and 'down'*/
             showButtons: true,
+            verticalAlignText: "center", /*options are "top" (default), "bottom" and "center"*/
+            horizontalAlignText: "center", /*options are "left" (default), "center", "right"*/
             htmlBlocks: [
-                "<h2 style='width: 100%; text-align: center;'>This is an Image</h2><img src='../images/logo_2.JPG'>",
+                "<div><h2 style='width: 100%; text-align: center;'>This is an Image</h2><img src='../images/logo_2.JPG'></div>",
                 "<img src='../images/logo_fin.png'>",
                 "Just plain text without html",
                 "<p>This is the third block</p>"

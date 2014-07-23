@@ -63,6 +63,7 @@
     width: 100%;
     text-transform: none;
     font-size: 14px;
+    top: 10000px;
   }
   .text_block a {
       text-decoration: underline;
