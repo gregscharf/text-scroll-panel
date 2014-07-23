@@ -1,21 +1,28 @@
 (function ($) {
     $.fn.scrolltext = function(options){
-        var textDisplayDuration = options.textDisplayDuration || 4000;
-        var scrollSpeed = options.scrollSpeed || 1000;
-        var scrollDirection = options.scrollDirection || 'down';
-        var scrollMultiplier = scrollDirection === 'down' ? -1 : 1;
-        var afterSetupFunction = options.afterSetupCallback || null;   
-        var pauseOnHover = options.pauseOnHover || false;
-        var showButtons = options.showButtons || false;
-        var minBlockHeight = options.minPanelHeight || 40;
-        var verticalAlign = options.verticalAlignText || "none"
-        var horizontalAlign = options.horizontalAlignText || "left";
+
+        var defaults = {
+          textDisplayDuration   : 5000,
+          scrollSpeed           : 1000,
+          scrollDirection       : 'down',
+          afterSetupFunction    : null,
+          pauseOnHover          :  true,
+          minBlockHeight        :  40,
+          verticalAlign         :  "none",
+          horizontalAlign       :  "left",
+          isResponsive          :  true,
+          showButtons           :  true
+        }
+
+        var settings = $.extend({}, defaults, options);
+
+        var scrollMultiplier = settings.scrollDirection === 'down' ? -1 : 1;
         var totalBlocks;
         var currentBlock = {};
         var nextBlock = {};
         var blockArray = [];
         var scrollDistance;
-        var maxBlockHeight = minBlockHeight;
+        var maxBlockHeight = settings.minBlockHeight;
         var scrollTimer;
         var resizeTimer;
         var scrolling = false;
@@ -23,11 +30,17 @@
         var scrollContainer = $(this);
         var scrollPanel;
 
+
         init();
         
         function init(){
+            console.log(settings);
+
+            if(settings.isResponsive)
+                $(window).resize(adjustScrollPanelHeight);  
+
             scrollPanel = $("<div class='scroll_panel'></div>");
-            if(showButtons) {
+            if(settings.showButtons) {
                 scrollPanel.append("<i class='icon-chevron-up scroll_up'></i><i class='icon-chevron-down scroll_down'></i>");
             }
             scrollContainer.append(scrollPanel);
@@ -35,9 +48,8 @@
             createBlocks();            
         }
 
-        $(window).resize(onResize);  
 
-        function onResize(){
+        function adjustScrollPanelHeight(){
             clearScrollTimer();
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(adjustParameters, 500);
@@ -50,7 +62,7 @@
             clearScrollTimer();
         });
 
-        if(pauseOnHover) {
+        if(settings.pauseOnHover) {
            scrollPanel.hover(function(){
                 clearScrollTimer();
                 inHover = true;
@@ -66,7 +78,7 @@
             if(scrolling)
                 return;
             clearScrollTimer();
-            if(scrollDirection === 'up')
+            if(settings.scrollDirection === 'up')
                 scrollBlocks();
             else
                 reverseScrollBlocks('up');
@@ -76,16 +88,16 @@
             if(scrolling)
                 return;
             clearScrollTimer();
-            if(scrollDirection === 'down')
+            if(settings.scrollDirection === 'down')
                 scrollBlocks();
             else
                 reverseScrollBlocks('down');
         });
 
         function createBlocks() {
-            totalBlocks = options.htmlBlocks.length;
+            totalBlocks = settings.htmlBlocks.length;
             for(var i = 0; i < totalBlocks; i++ ){
-                var newBlock = $('<div class="text_block">' + options.htmlBlocks[i] + '</div>');
+                var newBlock = $('<div class="text_block">' + settings.htmlBlocks[i] + '</div>');
                 scrollPanel.append(newBlock);
                 blockArray.push({block: $(newBlock), id: i});
                 var image = newBlock.find('img');
@@ -100,8 +112,8 @@
             }
 
             var textBlock = scrollPanel.children('.text_block');
-            textBlock.css('text-align', horizontalAlign);
-            switch(verticalAlign) {
+            textBlock.css('text-align', settings.horizontalAlign);
+            switch(settings.verticalAlign) {
                 case "top":
                     textBlock.addClass('v_align_block');
                     textBlock.find('>:first-child').addClass('v_align_child_top');
@@ -122,7 +134,7 @@
 
         function createScrollTimer() {
             if(!scrollTimer && !inHover && !scrolling){
-                scrollTimer = setTimeout(scrollBlocks, textDisplayDuration);
+                scrollTimer = setTimeout(scrollBlocks, settings.textDisplayDuration);
             }
         }
 
@@ -133,9 +145,9 @@
 
         function adjustParameters(){
             if(scrolling)
-                onResize();
+                adjustScrollPanelHeight();
 
-            maxBlockHeight = minBlockHeight;
+            maxBlockHeight = settings.minBlockHeight;
             clearScrollTimer();
             for(var i = 0; i < totalBlocks; i++ ){
                 var height = blockArray[i].block.height();
@@ -170,7 +182,7 @@
             $(nextBlock.block).css('top', maxBlockHeight*multiplier + 'px');
             scrollBlocks();
             //restore the original scroll direction
-            if(scrollDirection === 'up') {
+            if(settings.scrollDirection === 'up') {
                 scrollDistance = "-=" + maxBlockHeight;
             }else{
                 scrollDistance = "+=" + maxBlockHeight;
@@ -184,7 +196,7 @@
             nextBlock = nBlock;
             $(nextBlock.block).css('top', maxBlockHeight + "px");
 
-            if(scrollDirection === 'up') {
+            if(settings.scrollDirection === 'up') {
                 scrollDistance = "-=" + maxBlockHeight;
             }else{
                 scrollDistance = "+=" + maxBlockHeight;
@@ -192,15 +204,15 @@
             $(nextBlock.block).css('top', maxBlockHeight*scrollMultiplier + 'px');
             scrollPanel.children('.text_block').css('visibility', 'visible');                                
             createScrollTimer(); 
-            if(afterSetupFunction)
-                afterSetupFunction();
+            if(settings.afterSetupFunction)
+                settings.afterSetupFunction();
         }
 
 
 
         function scrollCurrentBlock(){
           $(currentBlock.block).animate({"top":scrollDistance},{
-            duration: scrollSpeed,
+            duration: settings.scrollSpeed,
             easing: "linear",
             complete:function(){
 
@@ -210,7 +222,7 @@
 
         function scrollNextBlock(){
           $(nextBlock.block).animate({"top":scrollDistance},{
-            duration: scrollSpeed,
+            duration: settings.scrollSpeed,
             easing: "linear",
             complete:function(){
                 currentBlock = nextBlock;
