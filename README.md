@@ -1,11 +1,11 @@
 **Text Scroll Panel**
 =================
+
+The demo @ http://gregscharf.com is displaying customer testimonials in the footer.
+
 Features:
 - Plugin to add blocks of scrolling text, html or images.
 - Blocks scroll (up or down) via a timer or optional buttons.
-
-Demo:
-- Currently being used @ http://gregscharf.com to display customer testimonials in the footer.
 
 Tasks:
 - [x] Adjust panel height and max block height on window resize for responsize sites.
