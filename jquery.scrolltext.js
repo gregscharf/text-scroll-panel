@@ -8,6 +8,8 @@
         var pauseOnHover = options.pauseOnHover || false;
         var showButtons = options.showButtons || false;
         var minBlockHeight = options.minPanelHeight || 40;
+        var verticalAlign = options.verticalAlignText || "none"
+        var horizontalAlign = options.horizontalAlignText || "left";
         var totalBlocks;
         var currentBlock = {};
         var nextBlock = {};
@@ -48,7 +50,6 @@
             clearScrollTimer();
         });
 
-        console.log(pauseOnHover);
         if(pauseOnHover) {
            scrollPanel.hover(function(){
                 clearScrollTimer();
@@ -98,7 +99,26 @@
                     maxBlockHeight = height;
             }
 
-            scrollPanel.children('.text_block').css('top', "10000px");
+
+            var textBlock = scrollPanel.children('.text_block');
+            textBlock.css('top', "10000px");
+            textBlock.css('text-align', horizontalAlign);
+            switch(verticalAlign) {
+                case "top":
+                    textBlock.addClass('v_align_block');
+                    textBlock.find('>:first-child').addClass('v_align_child_top');
+                    break;
+                case "center":
+                    textBlock.addClass('v_align_block');
+                    textBlock.find('>:first-child').addClass('v_align_child_middle');
+                    break;
+                case "bottom":
+                    textBlock.addClass('v_align_block');
+                    textBlock.find('>:first-child').addClass('v_align_child_bottom');
+                    break;
+                case "none":
+                    break;
+            }
             setParameters(blockArray[0], blockArray[1]);
         }
 
@@ -172,7 +192,7 @@
                 scrollDistance = "+=" + maxBlockHeight;
             }
             $(nextBlock.block).css('top', maxBlockHeight*scrollMultiplier + 'px');
-            scrollPanel.children('.text_block').show();                                
+            scrollPanel.children('.text_block').css('visibility', 'visible');                                
             createScrollTimer(); 
             if(afterSetupFunction)
                 afterSetupFunction();

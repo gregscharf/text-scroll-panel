@@ -38,17 +38,31 @@
     left:0; 
     right:0;
     margin: auto;
-    display: none;
+    visibility: hidden;
     text-align: left;
   }
-  .text_block p {
-    /*position: absolute;*/
+  .v_align_block {
+    display: table;
+    height: 100%;
+  }
+  .v_align_child_middle, .v_align_child_bottom, .v_align_child_top {
+    display: table-cell;
+  }
+  .v_align_child_top {
+    vertical-align: top;
+  }
+  .v_align_child_middle {
+    vertical-align: middle;
+  }
+
+  .v_align_child_bottom {
+    vertical-align: bottom;
+  }
+
+  .text_block{
     width: 100%;
     text-transform: none;
     font-size: 14px;
-    /*top: 0;*/
-    /*bottom: 0;*/
-    margin: auto
   }
   .text_block a {
       text-decoration: underline;
