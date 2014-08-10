@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+    <link rel="stylesheet"  href='scrolltext.css' />
+</head>
+<body>
+<!-- add something fancier later -->
+      <div id='scroll_pane_1'>
+      </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src ='jquery.scrolltext.js'></script>
+    <script>
+    $(document).ready(function(){
+        $('#scroll_pane_1').scrolltext({
+            textDisplayDuration: 8000,
+            minPanelHeight: 35, /*if using the nav buttons it's best to set this 35 pixels high at a minimum*/
+            scrollSpeed: 700, 
+            pauseOnHover: true,
+            scrollDirection: 'down', /*options are 'up' and 'down'*/
+            showButtons: true,
+            verticalAlignText: "center", /*options are "top" (default), "bottom" and "center"*/
+            horizontalAlignText: "center", /*options are "left" (default), "center", "right"*/
+            htmlBlocks: [
+		"<div><h2> This is not an Image</h2>",
+                "Just plain text without html",
+                "<p>This is the third block</p>"
+            ]
+        });
+    });
+    </script>
+</body>   
+</body>
+</html>
